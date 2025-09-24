@@ -21,7 +21,7 @@ XGBoost Classifier<br>
 
 **📂 Structure du Projet**
 
-NBA_Career_Prediction/<br>
+NBA_Career_Prediction/  
 │── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
 │── templates/                     # Fichiers HTML pour l'interface utilisateur<br>
 │   ├── index.html                 # Formulaire de saisie des données<br>
