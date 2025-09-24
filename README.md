@@ -56,8 +56,8 @@ L'API sera accessible à l'adresse http://127.0.0.1:8000<br>
 2. Tester l'API via cURL<br>
 Vous pouvez envoyer une requête POST contenant les statistiques d'un joueur :<br>
 
-curl -X 'POST' 'http://127.0.0.1:8000/predict' \<br>
--H 'Content-Type: application/json' \<br>
+curl -X 'POST' 'http://127.0.0.1:8000/predict' \
+-H 'Content-Type: application/json' \
 -d '{<br>
     "GP": 72,<br>
     "MIN": 30.2,<br>
