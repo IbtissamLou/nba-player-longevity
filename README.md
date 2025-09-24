@@ -1,23 +1,23 @@
-🏀 NBA Career Prediction API
+# 🏀 NBA Player Longevity Predictor
 
-📌 Description du Projet
+**📌 Description du Projet**
 Ce projet a pour objectif de prédire si un joueur NBA aura une carrière de plus de 5 ans, en utilisant des modèles de classification basés sur le Machine Learning. L'API REST développée avec FastAPI permet d'envoyer les statistiques d'un joueur et d'obtenir une prédiction en retour.
 
-🚀 Fonctionnalités Principales
+**🚀 Fonctionnalités Principales**
 Prédiction de la longévité d'un joueur NBA (Carrière > 5 ans ou non).
 
-⚙️ Modèles de classification utilisés :
+- Modèles de classification utilisés :
 Random Forest (RF)
 Balanced Random Forest (BalancedRF)
 XGBoost Classifier
 
-🎯 Optimisation des hyperparamètres avec Optuna.
-🔍 Évaluation des modèles basée sur le F1-score et l'équilibre entre Précision & Recall.
-🌐 API REST pour requêtes unitaires .
-📄 Interface utilisateur permettant de saisir les statistiques d’un joueur et d’afficher la prédiction.
+- Optimisation des hyperparamètres avec Optuna.
+- Évaluation des modèles basée sur le F1-score et l'équilibre entre Précision & Recall.
+- API REST pour requêtes unitaires .
+- Interface utilisateur permettant de saisir les statistiques d’un joueur et d’afficher la prédiction.
 
 
-📂 Structure du Projet
+**📂 Structure du Projet**
 
 NBA_Career_Prediction/
 │── rf_model/                        # Modèles entraînés sauvegardés en .pkl
@@ -35,15 +35,15 @@ NBA_Career_Prediction/
 │── scoring_optuna.py                # Fonction scoring avec optimisatiton Optuna 
 
 
-📦 Installation et Dépendances
+**📦 Installation et Dépendances**
 
-2️⃣ Créer un environnement virtuel et l’activer
+- Créer un environnement virtuel et l’activer
 python -m venv env
 source env/bin/activate  
-3️⃣ Installer les dépendances
+- Installer les dépendances
 pip install -r requirements.txt
 
-🎯 Utilisation de l'API REST
+**🎯 Utilisation de l'API REST**
 
 📌 1. Lancer l'API
 Démarrez le serveur FastAPI avec Uvicorn :
@@ -93,7 +93,7 @@ Remplissez le formulaire avec les statistiques du joueur et cliquez sur Predict 
 🎨 Interface plus intuitive avec Streamlit
 
 🧑‍💻 Auteurs
-👤 LOUKILI Ibtissam
+👤 LOUKILI Ibtissam - Contatc : ibtissamloukili20@gmail.com
 
 
 
