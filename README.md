@@ -8,10 +8,10 @@ Ce projet a pour objectif de prédire si un joueur NBA aura une carrière de plu
 
 Prédiction de la longévité d'un joueur NBA (Carrière > 5 ans ou non).
 
-- Modèles de classification utilisés :
-Random Forest (RF)
-Balanced Random Forest (BalancedRF)
-XGBoost Classifier
+- Modèles de classification utilisés :<br>
+Random Forest (RF)<br>
+Balanced Random Forest (BalancedRF)<br>
+XGBoost Classifier<br>
 
 - Optimisation des hyperparamètres avec Optuna.
 - Évaluation des modèles basée sur le F1-score et l'équilibre entre Précision & Recall.
@@ -21,13 +21,13 @@ XGBoost Classifier
 
 **📂 Structure du Projet**
 
-NBA_Career_Prediction/
-│── rf_model/                        # Modèles entraînés sauvegardés en .pkl
-│── templates/                     # Fichiers HTML pour l'interface utilisateur
-│   ├── index.html                 # Formulaire de saisie des données
-│   ├── result.html                 # Page de résultats
-│── static/                          # Dossier pour fichiers CSS
-|── Data_prep.ipynb                   #Script préparation des données
+NBA_Career_Prediction/<br>
+│── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
+│── templates/                     # Fichiers HTML pour l'interface utilisateur<br>
+│   ├── index.html                 # Formulaire de saisie des données<br>
+│   ├── result.html                 # Page de résultats<br>
+│── static/                          # Dossier pour fichiers CSS<br>
+|── Data_prep.ipynb                   #Script préparation des données<br>
 │── Model_Intég.py                   # Code principal de l'API REST
 │── Model_classif.ipynb              # Script d'entraînement des modèles
 │── requirements.txt                 # Bibliothèques nécessaires
