@@ -22,25 +22,19 @@ XGBoost Classifier<br>
 **📂 Structure du Projet**
 
 NBA_Career_Prediction/  
-│── templates/                    
+│── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
+│── templates/                     # Fichiers HTML pour l'interface utilisateur<br>
 │   ├── index.html                 # Formulaire de saisie des données<br>
 │   ├── result.html                 # Page de résultats<br>
-│── docs/                   
-│   ├── NBA_Prediction_report.pdf   # Rapport projet en details<br>
 │── static/                          # Dossier pour fichiers CSS<br>
-|── src                             
-│   |── Data_prep.ipynb                   #Script préparation des données<br>
-│   |── Model_Intég.py                   # Code principal de l'API REST<br>
-│   |── Model_classif.ipynb              # Script d'entraînement des modèles<br>
-│   |── scoring_kfold.py                 # Fonction scoring Kfold<br>
-│   |── scoring_optim.py                 # Fonction scoring avec optimisation GridSearch<br>
-│   |── scoring_optuna.py                # Fonction scoring avec optimisatiton Optuna<br> 
-│   |── scoring_basic.py                 # Fonction scoring basic<br>
-│── tests
-│   ├── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
-│   ├── test.py
+|── Data_prep.ipynb                   #Script préparation des données<br>
+│── Model_Intég.py                   # Code principal de l'API REST<br>
+│── Model_classif.ipynb              # Script d'entraînement des modèles<br>
 │── requirements.txt                 # Bibliothèques nécessaires<br>
 │── README.md                        # Documentation du projet<br>
+│── scoring_kfold.py                 # Fonction scoring basic<br>
+│── scoring_optim.py                 # Fonction scoring avec optimisation GridSearch<br>
+│── scoring_optuna.py                # Fonction scoring avec optimisatiton Optuna<br> 
 
 
 **📦 Installation et Dépendances**
@@ -92,6 +86,7 @@ Ouvrez votre navigateur et accédez à :<br>
 http://127.0.0.1:8000<br>
 Remplissez le formulaire avec les statistiques du joueur et cliquez sur Predict pour voir le résultat.
 
+![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
 
 **🔥 Améliorations Futures**
 
@@ -101,7 +96,6 @@ Remplissez le formulaire avec les statistiques du joueur et cliquez sur Predict 
 - Interface plus intuitive avec Streamlit
 
 **🧑‍💻 Auteurs**
-LOUKILI Ibtissam - Contatc : ibtissamloukili20@gmail.com
-
+LOUKILI Ibtissam - Contact : ibtissamloukili20@gmail.com
 
 

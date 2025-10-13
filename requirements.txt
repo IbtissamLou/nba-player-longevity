@@ -21,6 +21,4 @@ requests==2.31.0
 # Utility / Support
 python-multipart==0.0.9
 
-# Optional (only if you use plots or notebooks interactively)
-# jupyterlab==4.0.10
-# ipykernel==6.27.1
+httpx
