@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    image: nba-longevity:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/model/rf_model.pkl
+    volumes:
+      - ./app:/app/app        # hot-reload app code (dev)
+      - ./app/model:/app/model  # mount model directory
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

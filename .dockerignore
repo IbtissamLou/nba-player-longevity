@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+*.ipynb
+.git
+.gitignore
+ml/data/raw/
+*.log
+.env

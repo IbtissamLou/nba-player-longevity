@@ -22,19 +22,25 @@ XGBoost Classifier<br>
 **📂 Structure du Projet**
 
 NBA_Career_Prediction/  
-│── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
-│── templates/                     # Fichiers HTML pour l'interface utilisateur<br>
+│── templates/                    
 │   ├── index.html                 # Formulaire de saisie des données<br>
 │   ├── result.html                 # Page de résultats<br>
+│── docs/                   
+│   ├── NBA_Prediction_report.pdf   # Rapport projet en details<br>
 │── static/                          # Dossier pour fichiers CSS<br>
-|── Data_prep.ipynb                   #Script préparation des données<br>
-│── Model_Intég.py                   # Code principal de l'API REST<br>
-│── Model_classif.ipynb              # Script d'entraînement des modèles<br>
+|── src                             
+│   |── Data_prep.ipynb                   #Script préparation des données<br>
+│   |── Model_Intég.py                   # Code principal de l'API REST<br>
+│   |── Model_classif.ipynb              # Script d'entraînement des modèles<br>
+│   |── scoring_kfold.py                 # Fonction scoring Kfold<br>
+│   |── scoring_optim.py                 # Fonction scoring avec optimisation GridSearch<br>
+│   |── scoring_optuna.py                # Fonction scoring avec optimisatiton Optuna<br> 
+│   |── scoring_basic.py                 # Fonction scoring basic<br>
+│── tests
+│   ├── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
+│   ├── test.py
 │── requirements.txt                 # Bibliothèques nécessaires<br>
 │── README.md                        # Documentation du projet<br>
-│── scoring_kfold.py                 # Fonction scoring basic<br>
-│── scoring_optim.py                 # Fonction scoring avec optimisation GridSearch<br>
-│── scoring_optuna.py                # Fonction scoring avec optimisatiton Optuna<br> 
 
 
 **📦 Installation et Dépendances**
