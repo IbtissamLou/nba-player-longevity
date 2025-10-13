@@ -26,11 +26,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
+      - name: Build and push multi-platform image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ secrets.DOCKER_USERNAME }}/nba-prediction-api:latest
 
       - name: Logout from Docker Hub
