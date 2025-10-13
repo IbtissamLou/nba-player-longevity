@@ -17,8 +17,9 @@ fastapi==0.110.0
 uvicorn==0.29.0
 jinja2==3.1.3
 requests==2.31.0
+httpx==0.24.1
+starlette==0.37.2
 
 # Utility / Support
 python-multipart==0.0.9
 
-httpx
