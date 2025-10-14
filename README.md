@@ -23,31 +23,31 @@ XGBoost Classifier<br>
 
 nba-player-longevity/
 │
-├── app/
-│   ├── main.py               # Application FastAPI principale
-│   ├── model/rf_model.pkl    # Modèle ML sauvegardé
-│   ├── templates/            # Fichiers HTML (index + result)
-│   └── static/               # CSS et fichiers statiques
-│── docs/
-    ├── NBA_Prediction.pdf    # Documentation detailées du projet 
+├── app/ <br>
+│   ├── main.py               # Application FastAPI principale <br>
+│   ├── model/rf_model.pkl    # Modèle ML sauvegardé <br>
+│   ├── templates/            # Fichiers HTML (index + result) <br>
+│   └── static/               # CSS et fichiers statiques <br>
+│── docs/ <br>
+    ├── NBA_Prediction.pdf    # Documentation detailées du projet <br>
 
-├── ml/
-│   ├── data/                 # Données brutes et transformées
-│   ├── notebooks/            # Notebooks d’analyse et d'entraînement
-│   └── utils/                # Fonctions utilitaires (scoring, optimisation, etc.)
+├── ml/ <br>
+│   ├── data/                 # Données brutes et transformées <br>
+│   ├── notebooks/            # Notebooks d’analyse et d'entraînement <br>
+│   └── utils/                # Fonctions utilitaires (scoring, optimisation, etc.) <br>
 │
-├── tests/
-│   ├── test_api.py           # Tests de l'API FastAPI
-│   ├── test_model.py         # Tests unitaires du modèle
-│   └── conftest.py         # suite pytest
+├── tests/ <br>
+│   ├── test_api.py           # Tests de l'API FastAPI <br>
+│   ├── test_model.py         # Tests unitaires du modèle <br>
+│   └── conftest.py         # suite pytest <br>
 
 │
-├── requirements.txt          # Dépendances Python
-├── Dockerfile                # Conteneurisation de l’app
-├── .github/workflows/
-│   ├── ci.yml                # Intégration continue (tests automatisés)
-│   └── cd.yml                # Livraison continue (build & push Docker)
-└── README.md                 # Documentation du projet
+├── requirements.txt          # Dépendances Python <br>
+├── Dockerfile                # Conteneurisation de l’app <br>
+├── .github/workflows/ <br>
+│   ├── ci.yml                # Intégration continue (tests automatisés) <br>
+│   └── cd.yml                # Livraison continue (build & push Docker) <br>
+└── README.md                 # Documentation du projet <br>
 
 
 **⚙️ Installation et Exécution Locale**
