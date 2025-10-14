@@ -4,7 +4,7 @@
 
 Ce projet a pour objectif de prédire si un joueur NBA aura une carrière de plus de 5 ans, en utilisant des modèles de classification basés sur le Machine Learning. L'API REST développée avec FastAPI permet d'envoyer les statistiques d'un joueur et d'obtenir une prédiction en retour.
 
-**🚀 Fonctionnalités Principales**
+### **🚀 Fonctionnalités Principales**
 
 Prédiction de la longévité d'un joueur NBA (Carrière > 5 ans ou non).
 
@@ -19,7 +19,7 @@ XGBoost Classifier<br>
 - Interface web avec formulaire et rendu dynamique via Jinja2.
 
 
-**⚙️ Installation et Exécution Locale**
+### **⚙️ Installation et Exécution Locale**
 
 1. Cloner le dépôt
    
@@ -43,7 +43,7 @@ uvicorn app.main:app --reload
 ➡️ L’API sera disponible sur :
 👉 http://127.0.0.1:8000
 
-**🎯 Utilisation de l’API**
+### **🎯 Utilisation de l’API**
 
 🔹 1. Interface Web
 
@@ -58,7 +58,7 @@ curl -X 'POST' 'http://127.0.0.1:8000/predict' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'GP=72&MIN=30.2&PTS=15.3&FGM=5.8&FGA=12.7&FG_Percentage=45.8&ThreeP_Made=1.2&ThreePA=3.6&ThreeP_Percentage=33.3&FTM=3.2&FTA=4.0&FT_Percentage=80.2&OREB=1.1&DREB=4.5&REB=5.6&AST=4.3&STL=1.2&BLK=0.5&TOV=2.1'
 
-**🧪 🔁 Continuous Testing & Integration**
+### **🧪 🔁 Continuous Testing & Integration**
 
 Tests unitaires automatisés avec pytest
 
@@ -72,7 +72,7 @@ Chaque push sur la branche principale déclenche les tests
 
 ![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
 
-**🚚 🚀 Continuous Delivery**
+### **🚚 🚀 Continuous Delivery**
 
 Une pipeline CD (GitHub Actions) automatise :
 
@@ -87,7 +87,7 @@ docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 ![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
 
 
-**🔥 Améliorations Futures**
+### **🔥 Améliorations Futures**
 
 🚀 Continuous Deployment (CDP) vers un serveur cloud (AWS / GCP / Azure)
 
@@ -97,7 +97,7 @@ docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 
 🎨 Interface plus intuitive (Streamlit ou React front-end)
 
-**🧑‍💻 Auteurs**
+### **🧑‍💻 Auteurs**
 LOUKILI Ibtissam - Contact : ibtissamloukili20@gmail.com
 
 
