@@ -1,39 +1,28 @@
-# ---------- builder stage (build wheels to speed up installs) ----------
-FROM python:3.10-slim AS builder
-WORKDIR /build
-COPY requirements.txt .
-# build wheels first to improve caching
-RUN apt-get update && apt-get install -y --no-install-recommends gcc g++ build-essential \
- && pip wheel --no-cache-dir --wheel-dir /build/wheels -r requirements.txt \
- && apt-get purge -y --auto-remove gcc g++ build-essential
-
-# ---------- runtime stage ----------
+# ---------- base image ----------
 FROM python:3.10-slim
+WORKDIR /app
+
+# Prevents Python from writing .pyc files and buffers
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    APP_HOME=/app
+    PYTHONUNBUFFERED=1
 
-# create non-root user
-RUN useradd --create-home appuser
-WORKDIR $APP_HOME
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc g++ build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# install wheels if present, else fallback to pip install
-COPY --from=builder /build/wheels /wheels
-RUN pip install --no-cache-dir /wheels/* || pip install --no-cache-dir -r requirements.txt
+# Copy requirements first (for caching)
+COPY requirements.txt .
 
-# copy application code
+# Upgrade pip and install dependencies (directly from requirements)
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+# Copy application files
 COPY . .
 
-# create model dir 
-RUN mkdir -p $APP_HOME/model && chown -R appuser:appuser $APP_HOME
-
-# copy entrypoint script
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chown appuser:appuser /app/entrypoint.sh
-
+# Create non-root user
+RUN useradd --create-home appuser && chown -R appuser:appuser /app
 USER appuser
+
 EXPOSE 8000
-ENTRYPOINT ["/app/entrypoint.sh"]
-
-
-
+ENTRYPOINT ["bash", "entrypoint.sh"]
