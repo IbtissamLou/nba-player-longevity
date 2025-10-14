@@ -19,37 +19,6 @@ XGBoost Classifier<br>
 - Interface web avec formulaire et rendu dynamique via Jinja2.
 
 
-**📂 Structure du Projet**
-
-nba-player-longevity/ <br>
-│
-├── app/ <br>
-│   ├── main.py               # Application FastAPI principale <br>
-│   ├── model/rf_model.pkl    # Modèle ML sauvegardé <br>
-│   ├── templates/            # Fichiers HTML (index + result) <br>
-│   └── static/               # CSS et fichiers statiques <br>
-│── docs/ <br>
-    ├── NBA_Prediction.pdf    # Documentation detailées du projet <br>
-
-├── ml/ <br>
-│   ├── data/                 # Données brutes et transformées <br>
-│   ├── notebooks/            # Notebooks d’analyse et d'entraînement <br>
-│   └── utils/                # Fonctions utilitaires (scoring, optimisation, etc.) <br>
-│
-├── tests/ <br>
-│   ├── test_api.py           # Tests de l'API FastAPI <br>
-│   ├── test_model.py         # Tests unitaires du modèle <br>
-│   └── conftest.py         # suite pytest <br>
-
-│
-├── requirements.txt          # Dépendances Python <br>
-├── Dockerfile                # Conteneurisation de l’app <br>
-├── .github/workflows/ <br>
-│   ├── ci.yml                # Intégration continue (tests automatisés) <br>
-│   └── cd.yml                # Livraison continue (build & push Docker) <br>
-└── README.md                 # Documentation du projet <br>
-
-
 **⚙️ Installation et Exécution Locale**
 
 1. Cloner le dépôt
