@@ -87,6 +87,7 @@ http://127.0.0.1:8000<br>
 Remplissez le formulaire avec les statistiques du joueur et cliquez sur Predict pour voir le résultat.
 
 ![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
+![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
 
 **🔥 Améliorations Futures**
 
