@@ -1,10 +1,10 @@
 # 🏀 NBA Player Longevity Predictor
 
-**📌 Description du Projet**
+### **📌 Description du Projet**
 
 Ce projet a pour objectif de prédire si un joueur NBA aura une carrière de plus de 5 ans, en utilisant des modèles de classification basés sur le Machine Learning. L'API REST développée avec FastAPI permet d'envoyer les statistiques d'un joueur et d'obtenir une prédiction en retour.
 
-**🚀 Fonctionnalités Principales**
+### **🚀 Fonctionnalités Principales**
 
 Prédiction de la longévité d'un joueur NBA (Carrière > 5 ans ou non).
 
@@ -16,86 +16,89 @@ XGBoost Classifier<br>
 - Optimisation des hyperparamètres avec Optuna.
 - Évaluation des modèles basée sur le F1-score et l'équilibre entre Précision & Recall.
 - API REST pour requêtes unitaires .
-- Interface utilisateur permettant de saisir les statistiques d’un joueur et d’afficher la prédiction.
+- Interface web avec formulaire et rendu dynamique via Jinja2.
 
 
-**📂 Structure du Projet**
+### **⚙️ Installation et Exécution Locale**
 
-NBA_Career_Prediction/  
-│── rf_model/                        # Modèles entraînés sauvegardés en .pkl<br>
-│── templates/                     # Fichiers HTML pour l'interface utilisateur<br>
-│   ├── index.html                 # Formulaire de saisie des données<br>
-│   ├── result.html                 # Page de résultats<br>
-│── static/                          # Dossier pour fichiers CSS<br>
-|── Data_prep.ipynb                   #Script préparation des données<br>
-│── Model_Intég.py                   # Code principal de l'API REST<br>
-│── Model_classif.ipynb              # Script d'entraînement des modèles<br>
-│── requirements.txt                 # Bibliothèques nécessaires<br>
-│── README.md                        # Documentation du projet<br>
-│── scoring_kfold.py                 # Fonction scoring basic<br>
-│── scoring_optim.py                 # Fonction scoring avec optimisation GridSearch<br>
-│── scoring_optuna.py                # Fonction scoring avec optimisatiton Optuna<br> 
+1. Cloner le dépôt
+   
+git clone https://github.com/IbtissamLou/nba-player-longevity.git
+cd nba-player-longevity
+
+2. Créer un environnement virtuel
+   
+python -m venv env
+source env/bin/activate
+
+3. Installer les dépendances
+   
+pip install -r requirements.txt
+
+4. Lancer l’API FastAPI
+   
+uvicorn app.main:app --reload
 
 
-**📦 Installation et Dépendances**
+➡️ L’API sera disponible sur :
+👉 http://127.0.0.1:8000
 
-- Créer un environnement virtuel et l’activer<br>
-python -m venv env<br>
-source env/bin/activate  <br>
-- Installer les dépendances<br>
-pip install -r requirements.txt<br>
+### **🎯 Utilisation de l’API**
 
-**🎯 Utilisation de l'API REST**
+🔹 1. Interface Web
 
-1. Lancer l'API<br>
-Démarrez le serveur FastAPI avec Uvicorn :<br>
+Accédez à :
+👉 http://127.0.0.1:8000
 
-uvicorn Model_depy:app --reload<br>
-L'API sera accessible à l'adresse http://127.0.0.1:8000<br>
+Remplissez les statistiques du joueur et cliquez sur Predict pour obtenir le résultat.
 
-2. Tester l'API via cURL<br>
-Vous pouvez envoyer une requête POST contenant les statistiques d'un joueur :<br>
+🔹 2. Requête API (via cURL ou Postman)
 
 curl -X 'POST' 'http://127.0.0.1:8000/predict' \
--H 'Content-Type: application/json' \
--d '{<br>
-    "GP": 72,<br>
-    "MIN": 30.2,<br>
-    "PTS": 15.3,<br>
-    "FGM": 5.8,<br>
-    "FGA": 12.7,<br>
-    "FG_Percentage": 45.8,<br>
-    "ThreeP_Made": 1.2,<br>
-    "ThreePA": 3.6,<br>
-    "ThreeP_Percentage": 33.3,<br>
-    "FTM": 3.2,<br>
-    "FTA": 4.0,<br>
-    "FT_Percentage": 80.2,<br>
-    "OREB": 1.1,<br>
-    "DREB": 4.5,<br>
-    "REB": 5.6,<br>
-    "AST": 4.3,<br>
-    "STL": 1.2,<br>
-    "BLK": 0.5,<br>
-    "TOV": 2.1<br>
-}'<br>
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'GP=72&MIN=30.2&PTS=15.3&FGM=5.8&FGA=12.7&FG_Percentage=45.8&ThreeP_Made=1.2&ThreePA=3.6&ThreeP_Percentage=33.3&FTM=3.2&FTA=4.0&FT_Percentage=80.2&OREB=1.1&DREB=4.5&REB=5.6&AST=4.3&STL=1.2&BLK=0.5&TOV=2.1'
 
-3. Tester l'API via l'interface web<br>
-Ouvrez votre navigateur et accédez à :<br>
+### **🧪 🔁 Continuous Testing & Integration**
 
-http://127.0.0.1:8000<br>
-Remplissez le formulaire avec les statistiques du joueur et cliquez sur Predict pour voir le résultat.
+Tests unitaires automatisés avec pytest
+
+Test de l’API FastAPI et du modèle ML
+
+Intégration continue via GitHub Actions (CI)
+
+Chaque push sur la branche principale déclenche les tests
+
+✅ Si tous les tests passent → la build est validée
 
 ![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
 
-**🔥 Améliorations Futures**
+### **🚚 🚀 Continuous Delivery**
 
-- Intégration de nouveaux modèles (Deep Learning si plus de données disponible?)
-- Amélioration des features sélectionnées
-- Déploiement sur un serveur cloud
-- Interface plus intuitive avec Streamlit
+Une pipeline CD (GitHub Actions) automatise :
 
-**🧑‍💻 Auteurs**
+le build Docker multi-plateforme (linux/amd64)
+
+le push automatique vers Docker Hub :
+ibti2/nba-prediction-api
+
+docker pull --platform linux/amd64 ibti2/nba-prediction-api:latest
+
+docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
+
+![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
+
+
+### **🔥 Améliorations Futures**
+
+🚀 Continuous Deployment (CDP) vers un serveur cloud (AWS / GCP / Azure)
+
+🤖 Intégration de modèles plus complexes (Deep Learning si plus de données)
+
+🧩 Monitoring en production (Prometheus / Grafana)
+
+🎨 Interface plus intuitive (Streamlit ou React front-end)
+
+### **🧑‍💻 Auteurs**
 LOUKILI Ibtissam - Contact : ibtissamloukili20@gmail.com
 
 
