@@ -1,6 +1,6 @@
 # 🏀 NBA Player Longevity Predictor
 
-**📌 Description du Projet**
+### **📌 Description du Projet**
 
 Ce projet a pour objectif de prédire si un joueur NBA aura une carrière de plus de 5 ans, en utilisant des modèles de classification basés sur le Machine Learning. L'API REST développée avec FastAPI permet d'envoyer les statistiques d'un joueur et d'obtenir une prédiction en retour.
 
