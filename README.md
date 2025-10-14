@@ -82,6 +82,7 @@ le push automatique vers Docker Hub :
 ibti2/nba-prediction-api
 
 docker pull --platform linux/amd64 ibti2/nba-prediction-api:latest
+
 docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 
 ![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
