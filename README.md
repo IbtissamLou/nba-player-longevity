@@ -21,7 +21,7 @@ XGBoost Classifier<br>
 
 **📂 Structure du Projet**
 
-nba-player-longevity/
+nba-player-longevity/ <br>
 │
 ├── app/ <br>
 │   ├── main.py               # Application FastAPI principale <br>
