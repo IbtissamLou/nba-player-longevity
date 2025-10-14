@@ -88,9 +88,43 @@ docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 ![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
 
 
-### **🔥 Améliorations Futures**
+### **🚀 Déploiement Continu (CDP) — Azure App Service**
 
-🚀 Continuous Deployment (CDP) vers un serveur cloud (AWS / GCP / Azure)
+Après avoir mis en place l’intégration continue (CI) et la livraison continue (CD), la dernière étape du pipeline MLOps consiste à automatiser le déploiement continu (CDP) — c’est-à-dire le déploiement automatique de chaque version validée de l’application en production.
+
+Dans ce projet, le déploiement est effectué grâce à **Azure App Service for Containers** 🌐.
+
+À chaque push sur la branche main, les étapes suivantes sont exécutées automatiquement :
+
+Le workflow GitHub Actions construit l’image Docker de l’application FastAPI.
+
+L’image est poussée sur Docker Hub (ibti2/nba-prediction-api:latest).
+
+Grâce au profil de publication Azure (stocké comme secret GitHub), GitHub Actions s’authentifie auprès d’Azure.
+
+La nouvelle image est ensuite déployée automatiquement sur l’application web hébergée sur Azure.
+
+👉 Résultat : chaque mise à jour du code déclenche un pipeline complet — du test à la mise en ligne — sans aucune intervention manuelle 🚀
+
+🔑 Technologies utilisées
+
+GitHub Actions → automatisation des workflows
+
+Docker Hub → hébergement de l’image du conteneur
+
+Azure App Service → hébergement du conteneur en production
+
+### **🔐 Gestion sécurisée des accès (Secrets GitHub)**
+
+DOCKER_USERNAME et DOCKER_PASSWORD → authentification à Docker Hub
+
+AZURE_WEBAPP_PUBLISH_PROFILE → authentification sécurisée à Azure App Service
+
+### **🧩 Vue d’ensemble du pipeline CI/CD**
+
+![CI/CD Pipeline](./images/pipeline.png)
+
+### **🔥 Améliorations Futures**
 
 🤖 Intégration de modèles plus complexes (Deep Learning si plus de données)
 
@@ -100,5 +134,3 @@ docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 
 ### **🧑‍💻 Auteurs**
 LOUKILI Ibtissam - Contact : ibtissamloukili20@gmail.com
-
-
