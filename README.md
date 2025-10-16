@@ -1,85 +1,79 @@
 # 🏀 NBA Player Longevity Predictor
 
-### **📌 Description du Projet**
+### **📌 Project Description**
 
-Ce projet a pour objectif de prédire si un joueur NBA aura une carrière de plus de 5 ans, en utilisant des modèles de classification basés sur le Machine Learning. L'API REST développée avec FastAPI permet d'envoyer les statistiques d'un joueur et d'obtenir une prédiction en retour.
+This project aims to predict whether an NBA player will have a career lasting more than 5 years, using Machine Learning classification models.
+A FastAPI REST API allows users to send a player’s statistics and receive a prediction in response.
 
-### **🚀 Fonctionnalités Principales**
+### **🚀 Main Features**
 
-Prédiction de la longévité d'un joueur NBA (Carrière > 5 ans ou non).
+Prediction of NBA player longevity (career > 5 years or not).
 
-- Modèles de classification utilisés :<br>
+- Classification models used :<br>
 Random Forest (RF)<br>
 Balanced Random Forest (BalancedRF)<br>
 XGBoost Classifier<br>
 
-- Optimisation des hyperparamètres avec Optuna.
-- Évaluation des modèles basée sur le F1-score et l'équilibre entre Précision & Recall.
-- API REST pour requêtes unitaires .
-- Interface web avec formulaire et rendu dynamique via Jinja2.
+- Hyperparameter optimization using Optuna.
+- Model evaluation based on F1-score and balance between Precision & Recall.
+- REST API for single prediction requests.
+- Web interface with a form and dynamic rendering via Jinja2.
 
 
-### **⚙️ Installation et Exécution Locale**
+### **⚙️ Local Installation & Execution**
 
-1. Cloner le dépôt
+1. Clone the repository
    
 git clone https://github.com/IbtissamLou/nba-player-longevity.git
 cd nba-player-longevity
 
-2. Créer un environnement virtuel
+2. Create a virtual environment
    
 python -m venv env
 source env/bin/activate
 
-3. Installer les dépendances
+3. Install dependencies
    
 pip install -r requirements.txt
 
-4. Lancer l’API FastAPI
+4. Launch the FastAPI application
    
 uvicorn app.main:app --reload
 
 
-➡️ L’API sera disponible sur :
+➡️ The API will be available at:
 👉 http://127.0.0.1:8000
 
-### **🎯 Utilisation de l’API**
+### **🎯 API Usage **
 
-🔹 1. Interface Web
+🔹 1. Web Interface
 
-Accédez à :
+Go to :
 👉 http://127.0.0.1:8000
 
-Remplissez les statistiques du joueur et cliquez sur Predict pour obtenir le résultat.
-
-🔹 2. Requête API (via cURL ou Postman)
-
-curl -X 'POST' 'http://127.0.0.1:8000/predict' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'GP=72&MIN=30.2&PTS=15.3&FGM=5.8&FGA=12.7&FG_Percentage=45.8&ThreeP_Made=1.2&ThreePA=3.6&ThreeP_Percentage=33.3&FTM=3.2&FTA=4.0&FT_Percentage=80.2&OREB=1.1&DREB=4.5&REB=5.6&AST=4.3&STL=1.2&BLK=0.5&TOV=2.1'
+Fill in the player’s statistics and click Predict to get the result.
 
 ### **🧪 🔁 Continuous Testing & Integration**
 
-Tests unitaires automatisés avec pytest
+Automated unit testing with pytest
 
-Test de l’API FastAPI et du modèle ML
+Tests for FastAPI API and ML model
 
-Intégration continue via GitHub Actions (CI)
+Continuous Integration (CI) with GitHub Actions
 
-Chaque push sur la branche principale déclenche les tests
+Each push to the main branch triggers all tests
 
-✅ Si tous les tests passent → la build est validée
+✅ If all tests pass → the build is validated
 
 ![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
 
 ### **🚚 🚀 Continuous Delivery**
 
-Une pipeline CD (GitHub Actions) automatise :
+A CD pipeline (GitHub Actions) automates:
 
-le build Docker multi-plateforme (linux/amd64)
+Multi-platform Docker build (linux/amd64)
 
-le push automatique vers Docker Hub :
-ibti2/nba-prediction-api
+Automatic push to Docker Hub → ibti2/nba-prediction-api
 
 docker pull --platform linux/amd64 ibti2/nba-prediction-api:latest
 
@@ -90,47 +84,48 @@ docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 
 ### **🚀 Déploiement Continu (CDP) — Azure App Service**
 
-Après avoir mis en place l’intégration continue (CI) et la livraison continue (CD), la dernière étape du pipeline MLOps consiste à automatiser le déploiement continu (CDP) — c’est-à-dire le déploiement automatique de chaque version validée de l’application en production.
+After setting up Continuous Integration (CI) and Continuous Delivery (CD),
+the final step of the MLOps pipeline is Continuous Deployment (CDP) — meaning automatic deployment of every validated version to production.
 
-Dans ce projet, le déploiement est effectué grâce à **Azure App Service for Containers** 🌐.
+In this project, deployment is handled using Azure App Service for Containers 🌐.
 
-À chaque push sur la branche main, les étapes suivantes sont exécutées automatiquement :
+Each push to the main branch triggers the following automated steps:
 
-Le workflow GitHub Actions construit l’image Docker de l’application FastAPI.
+- GitHub Actions builds the Docker image of the FastAPI application.
 
-L’image est poussée sur Docker Hub (ibti2/nba-prediction-api:latest).
+- The image is pushed to Docker Hub (ibti2/nba-prediction-api:latest).
 
-Grâce au profil de publication Azure (stocké comme secret GitHub), GitHub Actions s’authentifie auprès d’Azure.
+- Using the Azure publish profile (stored as a GitHub secret), GitHub Actions authenticates with Azure.
 
-La nouvelle image est ensuite déployée automatiquement sur l’application web hébergée sur Azure.
+- The new image is automatically deployed to the web app hosted on Azure.
 
-👉 Résultat : chaque mise à jour du code déclenche un pipeline complet — du test à la mise en ligne — sans aucune intervention manuelle 🚀
+👉 Result: Every code update triggers a complete pipeline — from testing to deployment — with no manual intervention 🚀
 
-🔑 Technologies utilisées
+🔑 Technologies Used
 
-GitHub Actions → automatisation des workflows
+GitHub Actions → workflow automation
 
-Docker Hub → hébergement de l’image du conteneur
+Docker Hub → container image hosting
 
-Azure App Service → hébergement du conteneur en production
+Azure App Service → production container hosting
 
-### **🔐 Gestion sécurisée des accès (Secrets GitHub)**
+### **🔐 Secure Access Management (GitHub Secrets)**
 
-DOCKER_USERNAME et DOCKER_PASSWORD → authentification à Docker Hub
+DOCKER_USERNAME and DOCKER_PASSWORD → Docker Hub authentication
 
-AZURE_WEBAPP_PUBLISH_PROFILE → authentification sécurisée à Azure App Service
+AZURE_WEBAPP_PUBLISH_PROFILE → secure authentication to Azure App Service
 
-### **🧩 Vue d’ensemble du pipeline CI/CD**
 
-![CI/CD Pipeline](./images/pipeline.png)
+### **🔥 Future Improvements**
 
-### **🔥 Améliorations Futures**
+🤖 Integration of more advanced models
+Incorporate Deep Learning architectures (e.g., Neural Networks) when more player data becomes available.
 
-🤖 Intégration de modèles plus complexes (Deep Learning si plus de données)
+🧩 Production Monitoring
+Add real-time monitoring and performance tracking using tools like Prometheus and Grafana.
 
-🧩 Monitoring en production (Prometheus / Grafana)
+🎨 More Intuitive Interface
+Develop a modern and user-friendly interface using Streamlit or a React front-end connected to the FastAPI backend.
 
-🎨 Interface plus intuitive (Streamlit ou React front-end)
-
-### **🧑‍💻 Auteurs**
-LOUKILI Ibtissam - Contact : ibtissamloukili20@gmail.com
+### **🧑‍💻 Authors**
+Ibtissam Lou — Data Scientist & ML Engineer - Contact : ibtissamloukili20@gmail.com
