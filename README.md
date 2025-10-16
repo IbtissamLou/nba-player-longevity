@@ -82,7 +82,7 @@ docker run --platform linux/amd64 -p 8000:8000 ibti2/nba-prediction-api:latest
 ![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
 
 
-### **🚀 Déploiement Continu (CDP) — Azure App Service**
+### **🚀 Continuous Deployment (CDP) — Azure App Service**
 
 After setting up Continuous Integration (CI) and Continuous Delivery (CD),
 the final step of the MLOps pipeline is Continuous Deployment (CDP) — meaning automatic deployment of every validated version to production.
