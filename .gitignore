@@ -46,7 +46,6 @@ ml/models/
 # =====================
 reports/
 ml/reports/
-ml/packaging/packages/
 
 # =====================
 # IDE / OS
