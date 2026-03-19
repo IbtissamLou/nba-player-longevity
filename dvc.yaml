@@ -1,0 +1,63 @@
+stages:
+  data_cycle:
+    cmd: python -m ml.run_data_cycle --config ml/configs/data.yaml
+    deps:
+      - ml/data_pipeline/run_data_cycle.py
+      - ml/data_pipeline/ingest.py
+      - ml/data_pipeline/clean.py
+      - ml/data_pipeline/validate.py
+      - ml/data_pipeline/stats.py
+      - ml/data_pipeline/anomaly.py
+      - ml/schemas/nba.py
+      - ml/configs/data.yaml
+      - ml/data/raw/nba.csv
+    outs:
+      - ml/data/interim/nba_clean.parquet
+      - ml/data/processed/nba_validated.parquet
+    metrics:
+      - ml/reports/data_profile.json
+      - ml/reports/data_checks.json
+      - ml/reports/anomaly_report.json
+      #- ml/reports/drift_report.json
+    always_changed: false
+
+  feature_cycle:
+    cmd: python -m ml.run_feature_cycle --config ml/configs/feature.yaml
+    deps:
+      - ml/run_feature_cycle.py
+      - ml/feature_pipeline/feature_qa.py
+      - ml/feature_pipeline/eda.py
+      - ml/feature_pipeline/eda_extras.py
+      - ml/feature_pipeline/versioning.py
+      - ml/configs/feature.yaml
+      - ml/data/processed/nba_validated.parquet
+    outs:
+      - ml/data/features/nba_features.parquet
+    metrics:
+      - ml/reports/feature_manifest.json
+      - ml/reports/feature_qa.json
+      - ml/reports/eda/eda_summary.json
+      - ml/reports/eda/eda_extras_summary.json
+
+  
+  model_cycle:
+    cmd: python -m ml.run_model_cycle --config ml/configs/model.yaml 
+    deps:
+      - ml/data/features/nba_features.parquet
+      - ml/run_model_cycle.py
+      - ml/model_pipeline/build_pipeline.py 
+      - ml/model_pipeline/model_selection.python
+      - ml/model_pipeline/feature_selection_rf.py
+      - ml/model_pipeline/evaluate.py
+      - ml/model_pipeline/scoring_kfold.py
+      - ml/model_pipeline/scoring_optim.py
+      - ml/model_pipeline/scoring_optuna.py
+      - ml/model_pipeline/metrics 
+      - ml/model_pipeline/model_card.py
+      - ml/model_pipeline/train.py
+      - ml/packaging/package_model.py
+      - ml/registry/manage_stages.py
+      - ml/registry/mlflow_utils.py
+
+    outs:
+      - ml/models/nba_best_model.joblib

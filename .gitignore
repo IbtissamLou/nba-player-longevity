@@ -1,0 +1,63 @@
+# =====================
+# ENVIRONMENTS
+# =====================
+.venv/
+.conda/
+.git/
+.dvc/
+
+# =====================
+# PYTHON
+# =====================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# =====================
+# JUPYTER
+# =====================
+.ipynb_checkpoints/
+
+# =====================
+# LOGS
+# =====================
+logs/
+*.log
+
+# =====================
+# MLFLOW
+# =====================
+mlruns/
+
+# =====================
+# DATA (handled by DVC)
+# =====================
+data/
+ml/data/
+
+# =====================
+# MODELS (handled by DVC or packaging)
+# =====================
+ml/models/
+
+# =====================
+# REPORTS / ARTIFACTS
+# =====================
+reports/
+ml/reports/
+ml/packaging/packages/
+
+# =====================
+# IDE / OS
+# =====================
+.vscode/
+.idea/
+.DS_Store
+
+# =====================
+# TEST / CACHE
+# =====================
+.pytest_cache/
+.coverage
+htmlcov/

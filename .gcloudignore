@@ -1,0 +1,64 @@
+# =====================
+# 🚨 CRITICAL (BIG FOLDERS)
+# =====================
+
+.venv/
+.conda/
+.vene/
+.git/
+.github/
+
+# =====================
+# PYTHON
+# =====================
+
+__pycache__/
+*.pyc
+*.pyo
+
+# =====================
+# DVC
+# =====================
+
+.dvc/cache/
+
+# =====================
+# LOGS / EXPERIMENTS
+# =====================
+
+logs/
+mlruns/
+
+# =====================
+# DATA
+# =====================
+
+data/
+ml/data/
+
+# =====================
+# REPORTS
+# =====================
+
+reports/
+ml/reports/
+
+# =====================
+# MODELS
+# =====================
+
+ml/packaging/packages/*
+!ml/packaging/packages/nba_model_20260319T145318Z/
+!ml/packaging/packages/nba_model_20260319T145318Z/**
+
+# =====================
+# DEV FILES
+# =====================
+
+.ipynb_checkpoints/
+*.ipynb
+
+.vscode/
+.idea/
+
+.DS_Store

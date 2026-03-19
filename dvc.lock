@@ -1,0 +1,115 @@
+schema: '2.0'
+stages:
+  data_cycle:
+    cmd: python -m ml.data_pipeline.run_data_cycle --config ml/configs/data.yaml
+    deps:
+    - path: ml/configs/data.yaml
+      hash: md5
+      md5: d71f8d5bec71b671b39152aca8e33ec5
+      size: 2231
+    - path: ml/data/raw/nba.csv
+      hash: md5
+      md5: e66c085518bb39e63d0caca5a38aa080
+      size: 129360
+    - path: ml/data_pipeline/anomaly.py
+      hash: md5
+      md5: 0ca19975e236f5f10f287394e202d791
+      size: 4910
+    - path: ml/data_pipeline/clean.py
+      hash: md5
+      md5: ddf8a2570f148d6c7329aa52045ebca1
+      size: 3720
+    - path: ml/data_pipeline/ingest.py
+      hash: md5
+      md5: 02290e2d5ac51bd22c326d37ac7d62a1
+      size: 1407
+    - path: ml/data_pipeline/run_data_cycle.py
+      hash: md5
+      md5: 20a56cfac6af52ff91abf60fe47c52c5
+      size: 12618
+    - path: ml/data_pipeline/stats.py
+      hash: md5
+      md5: 5467fe844e8fdfa82b823e113354738f
+      size: 7229
+    - path: ml/data_pipeline/validate.py
+      hash: md5
+      md5: 04502b3b796265d98688bd744766346a
+      size: 4289
+    - path: ml/schemas/nba.py
+      hash: md5
+      md5: c3f46a1284f9e6cd14d3b0bc08e3d54a
+      size: 2303
+    outs:
+    - path: ml/data/interim/nba_clean.parquet
+      hash: md5
+      md5: c69a1219e4a942c36ab2f1e09689a23c
+      size: 61035
+    - path: ml/data/processed/nba_validated.parquet
+      hash: md5
+      md5: 07028f0b50978c6f78596233d1ceba15
+      size: 61031
+    - path: ml/reports/anomaly_report.json
+      hash: md5
+      md5: 45d1626281dde45c59b2e6a3ced1caa3
+      size: 2968
+    - path: ml/reports/data_checks.json
+      hash: md5
+      md5: 3fbce644cf1cc029ee25211f9c0f51a9
+      size: 1016
+    - path: ml/reports/data_profile.json
+      hash: md5
+      md5: b129c73d26e83d2a5a9002939698cc35
+      size: 4239
+  feature_cycle:
+    cmd: python -m ml.feature_pipeline.run_feature_cycle --config 
+      ml/configs/feature.yaml
+    deps:
+    - path: ml/configs/feature.yaml
+      hash: md5
+      md5: 177527c0b6a071e125e70e775ec86133
+      size: 2688
+    - path: ml/data/processed/nba_validated.parquet
+      hash: md5
+      md5: 07028f0b50978c6f78596233d1ceba15
+      size: 61031
+    - path: ml/feature_pipeline/eda.py
+      hash: md5
+      md5: 173ee457cab8d62272ef547a2f63b320
+      size: 8930
+    - path: ml/feature_pipeline/eda_extras.py
+      hash: md5
+      md5: 9af1216fcbb4d5fa485b161caab1a525
+      size: 11495
+    - path: ml/feature_pipeline/feature_qa.py
+      hash: md5
+      md5: 6c021974bef428bccb21b4ad5304eeef
+      size: 4134
+    - path: ml/feature_pipeline/run_feature_cycle.py
+      hash: md5
+      md5: 72341c1ee65821132a088236a79b95ce
+      size: 12512
+    - path: ml/feature_pipeline/versioning.py
+      hash: md5
+      md5: a9f6c6b539ac91c3f4f67abfe71c4321
+      size: 2872
+    outs:
+    - path: ml/data/features/nba_features.parquet
+      hash: md5
+      md5: 3f78dbc27683a8edfe8e7f4eed583212
+      size: 125960
+    - path: ml/reports/eda/eda_extras_summary.json
+      hash: md5
+      md5: 7a4b0acec993ca4e4b8183264ebe5eca
+      size: 561
+    - path: ml/reports/eda/eda_summary.json
+      hash: md5
+      md5: c878ad1f13f3529149fcde00f8f57bc5
+      size: 503
+    - path: ml/reports/feature_manifest.json
+      hash: md5
+      md5: 44ff921b5cfbe3541603c6101fca8c3e
+      size: 1173
+    - path: ml/reports/feature_qa.json
+      hash: md5
+      md5: a8fefc838ed8620fc0cd8464156a3e28
+      size: 902

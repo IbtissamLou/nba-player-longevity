@@ -1,0 +1,110 @@
+
+# ===============================================================
+# Feature Cycle configuration
+# ===============================================================
+
+
+dataset:
+  # Input: ML-ready data from the Data Cycle
+  input_path: ml/data/processed/nba_validated.parquet
+  target_col: TARGET_5Yrs
+  id_cols: [Name]
+
+reproducibility:
+  random_state: 42
+
+leakage:
+  enabled: true
+  forbidden_feature_cols: [TARGET_5Yrs]
+
+  # Drop IDs from features to prevent memorization leakage
+  drop_id_cols: true
+
+  # Protects against target leakage (features that are almost the target)
+  check_target_proxy: true
+  max_abs_target_corr_warn: 0.85   # |corr(feature,target)| > 0.85 -> warning
+  max_abs_target_corr_fail: 0.95   # |corr(feature,target)| > 0.95 -> hard fail
+
+  # Catch duplicate / near-duplicate columns (e.g. from bad joins)
+  check_duplicate_columns: true
+
+  # Optional: columns that must exist (guard config mistakes)
+  required_cols: [Name, GP, MIN, PTS, FGM, FGA, FG%, 3P Made, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB, REB, AST, STL, BLK, TOV, TARGET_5Yrs]
+
+
+eda:
+  enabled: true
+  out_dir: ml/reports/eda
+  exclude_cols: [Name, TARGET_5Yrs]
+
+  skew:
+    high_threshold: 1.0
+    moderate_threshold: 0.5
+    zero_ratio_threshold: 0.30
+
+  feature_scoring:
+    enabled: true
+    k_best: 10
+    method: f_classif   # or mutual_info
+
+
+correlation:
+  enabled: true
+  threshold: 0.95
+  method: pearson
+  exclude_cols: [TARGET_5Yrs]
+  max_features_heatmap: 25
+  save_heatmap: true
+
+
+feature_qa:
+  enabled: true
+  missing_warn: 0.05
+  missing_fail: 0.30
+  constant_unique_ratio_warn: 0.01
+  constant_unique_ratio_fail: 0.001
+  inf_fail: true
+
+
+eda_extras:
+  enabled: true
+  out_dir: ml/reports/eda
+
+  missingness_heatmap:
+    enabled: true
+    max_cols: 30
+
+  class_conditional:
+    enabled: true
+    max_cols: 12
+
+  feature_importance:
+    enabled: true
+    model: random_forest
+    n_estimators: 50
+    max_depth: 5
+    top_k: 15
+
+  pca:
+    enabled: true
+    n_components: 10
+
+
+feature_versioning:
+  save_manifest: true
+  manifest_path: ml/reports/feature_manifest.json
+  include_stats: true
+
+
+outputs:
+  #base feature table 
+  features_path : ml/data/features/nba_features.parquet
+  sort_by : ["Name"]
+  write_index: false
+
+  leakage_report_path: ml/reports/leakage_reports.json
+
+  # Correlation artifacts
+  correlation_matrix_csv: ml/reports/feature_correlation.csv
+  correlation_pairs_csv: ml/reports/high_correlation_pairs.csv
+  correlation_heatmap_png: ml/reports/feature_correlation.png

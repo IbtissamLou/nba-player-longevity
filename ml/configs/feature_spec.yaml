@@ -1,0 +1,87 @@
+
+# ===============================================================
+# Feature Spec (Domain Knowledge) 
+#This file is a "feature contract":
+# - what features we create
+# - how we create them (definition)
+# - expected ranges (sanity)
+# - whether feature is used for training
+# ===============================================================
+
+
+
+base:
+  target_col: TARGET_5Yrs
+  id_cols: [Name]
+  epsilon: 1e-9  # prevents division-by-zero
+
+# Which raw columns are required to compute domain features
+required_raw_cols:
+  - GP
+  - MIN
+  - PTS
+  - FGM
+  - FGA
+  - 3P Made
+  - 3PA
+  - FTM
+  - FTA
+  - OREB
+  - DREB
+  - REB
+  - AST
+  - STL
+  - BLK
+  - TOV
+
+# Domain features to compute.
+features:
+  PTS_per_MIN:
+    enabled: true
+    definition: "PTS / (MIN + eps)"
+    range: [0.0, 5.0]
+
+  FGM_per_FGA:
+    enabled: true
+    definition: "FGM / (FGA + eps)"
+    range: [0.0, 1.5]
+
+  FT_per_FTA:
+    enabled: true
+    definition: "FTM / (FTA + eps)"
+    range: [0.0, 1.5]
+
+  ThreePA_rate:
+    enabled: true
+    definition: "3PA / (FGA + eps)"
+    range: [0.0, 2.0]
+
+  FT_rate:
+    enabled: true
+    definition: "FTA / (FGA + eps)"
+    range: [0.0, 2.0]
+
+  Usage_proxy:
+    enabled: true
+    definition: "FGA + 0.44*FTA + TOV"
+    range: [0.0, 200.0]
+
+  AST_to_TOV:
+    enabled: true
+    definition: "AST / (TOV + eps)"
+    range: [0.0, 20.0]
+
+  REB_per_MIN:
+    enabled: true
+    definition: "REB / (MIN + eps)"
+    range: [0.0, 2.0]
+
+  OREB_share:
+    enabled: true
+    definition: "OREB / (REB + eps)"
+    range: [0.0, 1.0]
+
+  DREB_share:
+    enabled: true
+    definition: "DREB / (REB + eps)"
+    range: [0.0, 1.0]

@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    image: nba-longevity:latest
+    container_name: nba-longevity-api
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      MODEL_PACKAGE_DIR: ml/packaging/packages/latest
+
+    volumes:
+      - ./app:/app/app
+      - ./ml:/app/ml
+
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload

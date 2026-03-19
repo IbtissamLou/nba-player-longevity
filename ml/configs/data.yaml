@@ -1,0 +1,88 @@
+
+# ===============================================================
+# Data Cycle configuration
+# ===============================================================
+
+dataset: #This section centralizes data I/O and “what is the label”.
+  raw_path: ml/data/raw/nba.csv
+  interim_path: ml/data/interim/nba_clean.parquet #the output after cleaning
+  processed_path: ml/data/processed/nba_validated.parquet #the validated dataset (schema + rule validation passed)
+  target_col: TARGET_5Yrs
+  id_col: Name 
+
+cleaning: #This centralizes “which cleaning actions are enabled” --> impossible values in dataset 
+  drop_duplicates: true
+  impute_3p_pct: true
+  correct_impossible_values: true  # uses correction instead of dropping
+  percent_cols: ["FG%", "3P%", "FT%"] 
+  percent_bounds: [0, 100]
+  min_cap: 48
+  non_negative_cols: ["PTS","GP","MIN","FGM","FGA","3P Made","3PA","FTM","FTA","OREB","DREB","REB","AST","STL","BLK","TOV"]
+
+
+validation: #This centralizes domain rules toggles.
+  enforce_ranges: true
+  enforce_made_leq_attempted: true
+  enforce_rebounds_identity: true
+  rebounds_tolerance: 0.0 
+
+stats: #This supports reproducibility by letting compare dataset versions.
+  save_profile: true #write a dataset fingerprint report to JSON - shape / missing ratios / target distribution / numeric summaries (mean/std/quantiles, etc.)
+  missingness_warn_threshold: 0.2 #If any column has >20% missing → status becomes warn
+  missingness_fail_threshold: 0.5 #If any column has >50% missing → status becomes fail
+  outlier_zscore_threshold: 4.0 #z-score > 4 means extremely far from mean (rare under normal distribution)
+  outlier_rate_warn: 0.05 #If more than 2% of values exceed the z-score threshold → warn / For sports datasets, outliers are common so pick the right rate so it's not too low 
+  constant_unique_ratio_threshold: 0.01 #checks near-constant columns - if unique_ratio < 1% → column is basically constant
+
+anomaly:
+  enabled: true
+  fail_pipeline: false   #anomalies are reported, not blocking.
+  q_low: 0.01 #Anything outside these is flagged outlier.
+  q_high: 0.99 #Anything outside these is flagged outlier.
+  min_non_null: 10 #Skip anomaly bounds computation if column has <10 non-null values. - Prevents unstable quantiles on tiny columns.
+  exclude_cols: ["TARGET_5Yrs"]
+  max_outlier_rate_warn: 0.15 #Warn if outlier rate > 15%
+  max_outlier_rate_fail: 0.25 #Fail if outlier rate > 25%
+
+
+reproducibility:
+  random_state: 42
+
+features:
+  allowed:
+    - GP
+    - MIN
+    - PTS
+    - FGM
+    - FGA
+    - FG%
+    - 3P Made
+    - 3PA
+    - 3P%
+    - FTM
+    - FTA
+    - FT%
+    - OREB
+    - DREB
+    - REB
+    - AST
+    - STL
+    - BLK
+    - TOV
+
+outputs: #prevents subtle differences across runs
+  format: parquet
+  parquet_engine: pyarrow
+  sort_by: ["Name"]      
+  write_index: false
+
+run_metadata: #each run to produce a small manifest
+  save_manifest: true
+  manifest_path: ml/reports/run_manifest.json
+
+drift:
+  enabled: false
+  baseline_profile: ml/reports/baseline_profile.json
+  fail_on_drift: false
+
+

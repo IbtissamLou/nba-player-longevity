@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBA Career Prediction</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --danger: #ef4444;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .hero {
+      margin-bottom: 24px;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chip {
+      background: rgba(56, 189, 248, 0.12);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2 {
+      margin: 0 0 18px;
+      font-size: 1.2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #082f49;
+    }
+
+    .btn-secondary {
+      background: #334155;
+      color: white;
+    }
+
+    .result-box {
+      display: grid;
+      gap: 14px;
+    }
+
+    .result-main {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .result-main.negative {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .result-title {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .result-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .metric-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .help {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .error {
+      margin-top: 14px;
+      color: #fecaca;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      padding: 12px 14px;
+      border-radius: 14px;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    .footer-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .feature-count {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>NBA Career Prediction Interface</h1>
+      <p>
+        Enter the exact selected features used by the packaged model to estimate whether a player is likely
+        to stay in the league for at least 5 years.
+      </p>
+      <div class="meta">
+        <div class="chip">Package: {{ package_id }}</div>
+        <div class="chip">Threshold: {{ "%.3f"|format(threshold) }}</div>
+        <div class="chip">Features: {{ features|length }}</div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="card">
+        <h2>Model Inputs</h2>
+        <div class="feature-count">
+          This form is generated directly from the packaged model schema.
+        </div>
+
+        <form id="predict-form">
+          <div class="grid">
+            {% for feature in features %}
+            {% set safe_id = "feature_" ~ loop.index0 %}
+            <div class="field">
+              <label for="{{ safe_id }}">{{ feature }}</label>
+              <input
+                id="{{ safe_id }}"
+                data-feature-name="{{ feature }}"
+                type="number"
+                step="any"
+                placeholder="Enter {{ feature }}"
+                required
+              >
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="actions">
+            <button class="btn-primary" type="submit">Predict Career Outcome</button>
+            <button class="btn-secondary" type="button" id="fill-random">Fill Demo Values</button>
+          </div>
+
+          <div id="error-box" class="error"></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Prediction Result</h2>
+        <div class="result-box">
+          <div id="result-main" class="result-main">
+            <div class="result-title">Prediction</div>
+            <p id="prediction-label" class="result-value">Waiting for input</p>
+          </div>
+
+          <div class="metric-list">
+            <div class="metric">
+              <div class="metric-label">Probability</div>
+              <div id="probability-value" class="metric-value">—</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Decision Threshold</div>
+              <div id="threshold-value" class="metric-value">{{ "%.3f"|format(threshold) }}</div>
+            </div>
+          </div>
+
+          <div class="help">
+            This interface uses the packaged model produced by the model cycle,
+            including the tuned threshold selected during validation.
+          </div>
+
+          <div class="footer-note">
+            Because the form is generated from the model package, the serving layer stays aligned
+            with the exact feature schema used during training.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("predict-form");
+    const errorBox = document.getElementById("error-box");
+    const predictionLabel = document.getElementById("prediction-label");
+    const probabilityValue = document.getElementById("probability-value");
+    const thresholdValue = document.getElementById("threshold-value");
+    const resultMain = document.getElementById("result-main");
+    const fillRandomBtn = document.getElementById("fill-random");
+
+    function showError(message) {
+      errorBox.style.display = "block";
+      errorBox.textContent = typeof message === "string" ? message : JSON.stringify(message, null, 2);
+    }
+
+    function hideError() {
+      errorBox.style.display = "none";
+      errorBox.textContent = "";
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideError();
+
+      const payload = {};
+      const inputs = document.querySelectorAll("#predict-form input[data-feature-name]");
+
+      for (const input of inputs) {
+        const featureName = input.dataset.featureName;
+        const rawValue = input.value;
+
+        if (rawValue === "") {
+          showError(`Please enter a value for ${featureName}`);
+          return;
+        }
+
+        const parsedValue = parseFloat(rawValue);
+        if (Number.isNaN(parsedValue)) {
+          showError(`Invalid numeric value for ${featureName}`);
+          return;
+        }
+
+        payload[featureName] = parsedValue;
+      }
+
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ features: payload })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail));
+        }
+
+        const positive = data.prediction === 1;
+
+        predictionLabel.textContent = positive
+          ? "Likely to stay 5+ years"
+          : "Less likely to stay 5+ years";
+
+        probabilityValue.textContent = (data.probability * 100).toFixed(2) + "%";
+        thresholdValue.textContent = data.threshold_used.toFixed(3);
+
+        resultMain.classList.toggle("negative", !positive);
+      } catch (err) {
+        showError(err.message || "Prediction failed");
+      }
+    });
+
+    fillRandomBtn.addEventListener("click", () => {
+      const inputs = document.querySelectorAll("#predict-form input[data-feature-name]");
+      inputs.forEach((input) => {
+        input.value = (Math.random() * 10 + 1).toFixed(2);
+      });
+    });
+  </script>
+</body>
+</html>
