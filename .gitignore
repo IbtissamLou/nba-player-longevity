@@ -33,8 +33,8 @@ mlruns/
 # =====================
 # DATA (handled by DVC)
 # =====================
-data/
-ml/data/
+#data/
+#ml/data/
 
 # =====================
 # MODELS (handled by DVC or packaging)
