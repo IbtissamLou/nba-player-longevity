@@ -41,7 +41,7 @@ B --> C[Feature Engineering Pipeline]
 C --> D[Train/Test Split]
 D --> E[Model Training]
 
-E --> F[Hyperparameter Tuning (Optuna)]
+E --> F[Hyperparameter Tuning /Optuna]
 F --> G[Model Selection]
 
 G --> H[Threshold Optimization]
