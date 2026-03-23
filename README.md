@@ -7,7 +7,8 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-Production-blue)
 ![MLOps](https://img.shields.io/badge/MLOps-End--to--End-red)
 ![CI](https://img.shields.io/github/actions/workflow/status/IbtissamLou/nba-player-longevity/ci.yml)
-![License](https://img.shields.io/badge/License-MIT-lightgrey
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 ---
 
 ## 📌 Overview
