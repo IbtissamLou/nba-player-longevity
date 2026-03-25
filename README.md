@@ -30,7 +30,7 @@ Predicting player longevity is a **binary classification problem**:
 
 ---
 
-# 🔄 ## 🧠 System Architecture
+## 🔄 System Architecture
 
 ![Architecture](images/architecture.png)
 
