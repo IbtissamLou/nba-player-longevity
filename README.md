@@ -6,7 +6,6 @@
 ![GCP](https://img.shields.io/badge/Deployment-GCP%20Cloud%20Run-orange)
 ![ML](https://img.shields.io/badge/Machine%20Learning-Production-blue)
 ![MLOps](https://img.shields.io/badge/MLOps-End--to--End-red)
-![CI](https://img.shields.io/github/actions/workflow/status/IbtissamLou/nba-player-longevity/ci.yml)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ---
@@ -34,32 +33,32 @@ Predicting player longevity is a **binary classification problem**:
 
 ![Architecture](images/architecture.png)
 
-# 📊 1. DATA CYCLE
+## 📊 1. DATA CYCLE
 
-## ✅ Data Processing
+### ✅ Data Processing
 
 - Handling missing values
 - Outlier analysis (domain-aware, not blindly removed)
 - Feature validation rules
 - Dataset consistency checks
 
-## 🧠 Key Decisions
+### 🧠 Key Decisions
 
 - Preserve valid extreme values (important in sports data)
 - Avoid over-cleaning → maintain real-world distribution
 
 ---
 
-# 🧪 2. FEATURE ENGINEERING CYCLE
+## 🧪 2. FEATURE ENGINEERING CYCLE
 
-## 🔧 Implemented Features
+### 🔧 Implemented Features
 
 - Base features: player statistics
 - Skewness analysis & transformation strategy
 - Scaling (StandardScaler)
 - Feature selection (optional RF-based importance)
 
-## 📈 Feature Pipeline
+### 📈 Feature Pipeline
 
 - Automated pipeline using `scikit-learn`
 - Reproducible transformations
@@ -67,33 +66,33 @@ Predicting player longevity is a **binary classification problem**:
 
 ---
 
-# 🤖 3. MODEL CYCLE
+## 🤖 3. MODEL CYCLE
 
-## 🔍 Models Used
+### 🔍 Models Used
 
 - Random Forest
 - Balanced Random Forest
 - XGBoost
 
-## ⚙️ Training Strategy
+### ⚙️ Training Strategy
 
 - Cross-validation (Stratified K-Fold)
 - Hyperparameter tuning (Optuna)
 - Class imbalance handling (SMOTE)
 
-## 📊 Evaluation Metrics
+### 📊 Evaluation Metrics
 
 - Primary: **F1-score**
 - Secondary: Precision, Recall, Accuracy
 
-## 🎯 Threshold Optimization
+### 🎯 Threshold Optimization
 
 - Custom decision threshold (not default 0.5)
 - Optimized for business objective (F1)
 
 ---
 
-# 📦 4. MODEL PACKAGING (Production Ready)
+## 📦 4. MODEL PACKAGING (Production Ready)
 
 Instead of saving only a model file, we package:
 
@@ -104,7 +103,7 @@ threshold.json
 metrics.json
 
 
-## 💡 Why it matters
+### 💡 Why it matters
 
 - Reproducibility
 - Versioning
@@ -113,16 +112,16 @@ metrics.json
 
 ---
 
-# 🚀 5. SERVING LAYER (FastAPI)
+## 🚀 5. SERVING LAYER (FastAPI)
 
-## ⚙️ API Endpoints
+### ⚙️ API Endpoints
 
 - `/predict` → Real-time inference
 - `/predict_batch` → Batch inference
 - `/metrics` → Monitoring
 - `/health` → Health check
 
-## 🧠 Key Features
+### 🧠 Key Features
 
 - Input validation
 - Model loaded at startup
@@ -131,7 +130,7 @@ metrics.json
 
 ---
 
-# ⚡ Real-Time vs Batch Inference
+## ⚡ Real-Time vs Batch Inference
 
 | Type | Use Case |
 |------|--------|
@@ -142,14 +141,39 @@ metrics.json
 
 ---
 
-# ☁️ 6. CLOUD DEPLOYMENT (GCP - Cloud Run)
+### **🧪 🔁 Continuous Testing & Integration**
 
-## 🔧 Stack
+Automated unit testing with pytest
+
+Tests for FastAPI API and ML model
+
+Continuous Integration (CI) with GitHub Actions
+
+Each push to the main branch triggers all tests
+
+✅ If all tests pass → the build is validated
+
+![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
+
+### **🚚 🚀 Continuous Delivery**
+
+A CD pipeline (GitHub Actions) automates:
+
+Multi-platform Docker build (linux/amd64)
+
+Automatic push to Docker Hub 
+
+![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
+
+
+## ☁️ 6. CLOUD DEPLOYMENT (GCP - Cloud Run)
+
+### 🔧 Stack
 
 - Docker containerization
 - Google Cloud Run (serverless deployment)
 
-## 💡 Benefits
+### 💡 Benefits
 
 - Auto-scaling
 - Pay-per-use
@@ -157,13 +181,13 @@ metrics.json
 
 ---
 
-# 📊 7. MONITORING SYSTEM
+## 📊 7. MONITORING SYSTEM
 
 This project includes **production-level monitoring**.
 
 ---
 
-## ⚙️ System Monitoring
+### ⚙️ System Monitoring
 
 - Latency (avg, p95)
 - Throughput
@@ -172,7 +196,7 @@ This project includes **production-level monitoring**.
 
 ---
 
-## 📊 Data Monitoring
+### 📊 Data Monitoring
 
 - Input validation errors
 - Missing features tracking
@@ -180,17 +204,17 @@ This project includes **production-level monitoring**.
 
 ---
 
-## 🔍 Drift Monitoring
+### 🔍 Drift Monitoring
 
-### Data Drift
+#### Data Drift
 → Change in input feature distribution
 
-### Concept Drift
+#### Concept Drift
 → Change in relationship between features & target
 
 ---
 
-# 🔁 8. RETRAINING STRATEGY (Next Step)
+## 🔁 8. RETRAINING STRATEGY (Next Step)
 
 Planned:
 
@@ -200,27 +224,27 @@ Planned:
 
 ---
 
-# 🧪 9. TESTING & CI/CD
+## 🧪 9. TESTING & CI/CD
 
-## ✅ Testing
+### ✅ Testing
 
 - Unit tests (pytest)
 - API tests
 - End-to-end pipeline test
 
-## 🔁 CI Pipeline
+### 🔁 CI Pipeline
 
 - GitHub Actions
 - Automatic test execution
 
-## 🚀 CD Pipeline
+### 🚀 CD Pipeline
 
 - Docker build
 - Deployment automation
 
 ---
 
-# 🐳 10. RUN LOCALLY
+## 🐳 10. RUN LOCALLY
 
 ```bash
 git clone https://github.com/IbtissamLou/nba-player-longevity.git
