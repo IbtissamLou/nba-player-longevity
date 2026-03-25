@@ -32,42 +32,7 @@ Predicting player longevity is a **binary classification problem**:
 
 # 🔄 ## 🧠 System Architecture
 
-```mermaid
-flowchart LR
-
-A[Raw Data] --> B[Data Processing]
-B --> C[Feature Engineering Pipeline]
-
-C --> D[Train/Test Split]
-D --> E[Model Training]
-
-E --> F[Hyperparameter Tuning /Optuna]
-F --> G[Model Selection]
-
-G --> H[Threshold Optimization]
-H --> I[Final Model]
-
-I --> J[Model Packaging]
-J --> K[Model Registry / Storage]
-
-K --> L[FastAPI API]
-L --> M[Uvicorn Server]
-
-M --> N[Cloud Run Deployment]
-
-N --> O[Real-Time Inference]
-N --> P[Batch Inference]
-
-O --> Q[Monitoring System]
-P --> Q
-
-Q --> R[System Metrics]
-Q --> S[Data Monitoring]
-Q --> T[Prediction Monitoring]
-
-R --> U[Retraining Trigger]
-S --> U
-T --> U
+![Architecture](images/architecture.png)
 
 # 📊 1. DATA CYCLE
 
