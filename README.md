@@ -10,7 +10,7 @@
 
 ---
 
-## 📌 Overview
+## 📌 Project Description
 
 This project is a **production-ready Machine Learning system** that predicts whether an NBA player will have a career lasting more than **5 years**, based on early-career statistics.
 
@@ -33,66 +33,60 @@ Predicting player longevity is a **binary classification problem**:
 
 ![Architecture](images/architecture.png)
 
-## 📊 1. DATA CYCLE
+### 📊 1. DATA CYCLE
 
-### ✅ Data Processing
+#### ✅ Data Processing
 
 - Handling missing values
 - Outlier analysis (domain-aware, not blindly removed)
 - Feature validation rules
 - Dataset consistency checks
 
-### 🧠 Key Decisions
+##### 🧠 Key Decisions
 
 - Preserve valid extreme values (important in sports data)
 - Avoid over-cleaning → maintain real-world distribution
 
----
+### 🧪 2. FEATURE ENGINEERING CYCLE
 
-## 🧪 2. FEATURE ENGINEERING CYCLE
-
-### 🔧 Implemented Features
+#### 🔧 Implemented Features
 
 - Base features: player statistics
 - Skewness analysis & transformation strategy
 - Scaling (StandardScaler)
 - Feature selection (optional RF-based importance)
 
-### 📈 Feature Pipeline
+#### 📈 Feature Pipeline
 
 - Automated pipeline using `scikit-learn`
 - Reproducible transformations
 - Stored transformation metadata
 
----
+### 🤖 3. MODEL CYCLE
 
-## 🤖 3. MODEL CYCLE
-
-### 🔍 Models Used
+#### 🔍 Models Used
 
 - Random Forest
 - Balanced Random Forest
 - XGBoost
 
-### ⚙️ Training Strategy
+#### ⚙️ Training Strategy
 
 - Cross-validation (Stratified K-Fold)
 - Hyperparameter tuning (Optuna)
 - Class imbalance handling (SMOTE)
 
-### 📊 Evaluation Metrics
+#### 📊 Evaluation Metrics
 
 - Primary: **F1-score**
 - Secondary: Precision, Recall, Accuracy
 
-### 🎯 Threshold Optimization
+#### 🎯 Threshold Optimization
 
 - Custom decision threshold (not default 0.5)
 - Optimized for business objective (F1)
 
----
-
-## 📦 4. MODEL PACKAGING (Production Ready)
+### 📦 4. MODEL PACKAGING (Production Ready)
 
 Instead of saving only a model file, we package:
 
@@ -103,34 +97,30 @@ threshold.json
 metrics.json
 
 
-### 💡 Why it matters
+#### 💡 Why it matters
 
 - Reproducibility
 - Versioning
 - Easy rollback
 - Production compatibility
 
----
+### 🚀 5. SERVING LAYER (FastAPI)
 
-## 🚀 5. SERVING LAYER (FastAPI)
-
-### ⚙️ API Endpoints
+#### ⚙️ API Endpoints
 
 - `/predict` → Real-time inference
 - `/predict_batch` → Batch inference
 - `/metrics` → Monitoring
 - `/health` → Health check
 
-### 🧠 Key Features
+#### 🧠 Key Features
 
 - Input validation
 - Model loaded at startup
 - Error handling
 - Logging integration
 
----
-
-## ⚡ Real-Time vs Batch Inference
+### ⚡ Real-Time vs Batch Inference
 
 | Type | Use Case |
 |------|--------|
@@ -141,7 +131,7 @@ metrics.json
 
 ---
 
-### **🧪 🔁 Continuous Testing & Integration**
+## 🔁 Continuous Testing & Integration
 
 Automated unit testing with pytest
 
@@ -155,7 +145,9 @@ Each push to the main branch triggers all tests
 
 ![CI](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/ci.yml/badge.svg)
 
-### **🚚 🚀 Continuous Delivery**
+---
+
+## 🚀 Continuous Delivery
 
 A CD pipeline (GitHub Actions) automates:
 
@@ -165,15 +157,16 @@ Automatic push to Docker Hub
 
 ![CD](https://github.com/IbtissamLou/nba-player-longevity/actions/workflows/cd.yml/badge.svg)
 
+---
 
-## ☁️ 6. CLOUD DEPLOYMENT (GCP - Cloud Run)
+## ☁️ Cloud deployment (GCP - Cloud Run)
 
-### 🔧 Stack
+#### 🔧 Stack
 
 - Docker containerization
 - Google Cloud Run (serverless deployment)
 
-### 💡 Benefits
+#### 💡 Benefits
 
 - Auto-scaling
 - Pay-per-use
@@ -181,40 +174,34 @@ Automatic push to Docker Hub
 
 ---
 
-## 📊 7. MONITORING SYSTEM
+## 📊 Monitoring system
 
 This project includes **production-level monitoring**.
 
----
-
-### ⚙️ System Monitoring
+#### ⚙️ System Monitoring
 
 - Latency (avg, p95)
 - Throughput
 - Success rate
 - Error rate
 
----
-
-### 📊 Data Monitoring
+#### 📊 Data Monitoring
 
 - Input validation errors
 - Missing features tracking
 - Schema consistency
 
----
+#### 🔍 Drift Monitoring
 
-### 🔍 Drift Monitoring
-
-#### Data Drift
+##### Data Drift
 → Change in input feature distribution
 
-#### Concept Drift
+##### Concept Drift
 → Change in relationship between features & target
 
 ---
 
-## 🔁 8. RETRAINING STRATEGY (Next Step)
+## 🔁  Retraining strategy (Next Step)
 
 Planned:
 
@@ -224,27 +211,27 @@ Planned:
 
 ---
 
-## 🧪 9. TESTING & CI/CD
+## 🧪 Testing & CI/CD
 
-### ✅ Testing
+#### ✅ Testing
 
 - Unit tests (pytest)
 - API tests
 - End-to-end pipeline test
 
-### 🔁 CI Pipeline
+#### 🔁 CI Pipeline
 
 - GitHub Actions
 - Automatic test execution
 
-### 🚀 CD Pipeline
+#### 🚀 CD Pipeline
 
 - Docker build
 - Deployment automation
 
 ---
 
-## 🐳 10. RUN LOCALLY
+## 🐳 Local Installation & Execution 
 
 ```bash
 git clone https://github.com/IbtissamLou/nba-player-longevity.git
@@ -270,8 +257,10 @@ uvicorn app.main:app --reload
 curl -X POST /predict \
 -H "Content-Type: application/json" \
 -d '{ "features": {...} }'
+```
+---
 
-🔥 KEY MLOPS CONCEPTS IMPLEMENTED
+## 🔥 Key MlOps concepts implemented
 
 Feature pipeline
 Model versioning
@@ -281,22 +270,28 @@ Monitoring (system + data + predictions)
 Cloud deployment (serverless)
 CI/CD pipelines
 
-🧠 KEY LEARNINGS
+---
+
+## 🧠 Key Learnings
 
 A model is not the product — the system is
 Monitoring is as important as training
 Reproducibility is critical in ML systems
 Deployment constraints shape model design
 
-🚀 FUTURE IMPROVEMENTS
+---
+
+## 🚀 Future impovements
 
 Automated retraining pipeline
 Advanced drift detection (Evidently AI)
 Dashboard (Grafana / Streamlit)
 
-👩‍💻 Author
+---
+
+![NBA System Demo](images/nba_demo.gif)
+
+## 👩‍💻 Author
 
 Ibtissam LOUKILI
 ML Engineer
-
-📧 ibtissamloukili20@gmail.com
