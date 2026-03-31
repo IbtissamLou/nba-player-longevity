@@ -35,28 +35,28 @@ Predicting player longevity is a **binary classification problem**:
 
 ### 📊 1. DATA CYCLE
 
-#### ✅ Data Processing
+#### Data Processing
 
 - Handling missing values
 - Outlier analysis (domain-aware, not blindly removed)
 - Feature validation rules
 - Dataset consistency checks
 
-##### 🧠 Key Decisions
+##### Key Decisions
 
 - Preserve valid extreme values (important in sports data)
 - Avoid over-cleaning → maintain real-world distribution
 
 ### 🧪 2. FEATURE ENGINEERING CYCLE
 
-#### 🔧 Implemented Features
+#### Implemented Features
 
 - Base features: player statistics
 - Skewness analysis & transformation strategy
 - Scaling (StandardScaler)
 - Feature selection (optional RF-based importance)
 
-#### 📈 Feature Pipeline
+#### Feature Pipeline
 
 - Automated pipeline using `scikit-learn`
 - Reproducible transformations
@@ -64,24 +64,24 @@ Predicting player longevity is a **binary classification problem**:
 
 ### 🤖 3. MODEL CYCLE
 
-#### 🔍 Models Used
+#### Models Used
 
 - Random Forest
 - Balanced Random Forest
 - XGBoost
 
-#### ⚙️ Training Strategy
+#### Training Strategy
 
 - Cross-validation (Stratified K-Fold)
 - Hyperparameter tuning (Optuna)
 - Class imbalance handling (SMOTE)
 
-#### 📊 Evaluation Metrics
+#### Evaluation Metrics
 
 - Primary: **F1-score**
 - Secondary: Precision, Recall, Accuracy
 
-#### 🎯 Threshold Optimization
+#### Threshold Optimization
 
 - Custom decision threshold (not default 0.5)
 - Optimized for business objective (F1)
@@ -97,7 +97,7 @@ threshold.json
 metrics.json
 
 
-#### 💡 Why it matters
+#### Why it matters
 
 - Reproducibility
 - Versioning
@@ -106,14 +106,14 @@ metrics.json
 
 ### 🚀 5. SERVING LAYER (FastAPI)
 
-#### ⚙️ API Endpoints
+#### API Endpoints
 
 - `/predict` → Real-time inference
 - `/predict_batch` → Batch inference
 - `/metrics` → Monitoring
 - `/health` → Health check
 
-#### 🧠 Key Features
+#### Key Features
 
 - Input validation
 - Model loaded at startup
@@ -128,6 +128,8 @@ metrics.json
 | Batch | Large-scale scoring |
 
 👉 Both are implemented in this project.
+
+![NBA System Demo](images/nba_demo_s.gif)
 
 ---
 
@@ -288,8 +290,6 @@ Advanced drift detection (Evidently AI)
 Dashboard (Grafana / Streamlit)
 
 ---
-
-![NBA System Demo](images/nba_demo.gif)
 
 ## 👩‍💻 Author
 
